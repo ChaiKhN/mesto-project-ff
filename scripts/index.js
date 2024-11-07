@@ -14,7 +14,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 // Функция создания карточки
 function createCard(cardData, handleDeleteClick) {
   // Клонируем шаблон карточки
-  const cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   // Настраиваем значения карточки
   const cardImage = cardElement.querySelector('.card__image');
@@ -34,7 +34,7 @@ function createCard(cardData, handleDeleteClick) {
 // Функция удаления карточки
 function deleteCard(cardElement) {
   // Удаляем карточку из DOM
-  placesList.removeChild(cardElement);
+  cardElement.remove();
 }
 
 // Выводим карточки на страницу
