@@ -1,7 +1,7 @@
 import '../pages/index.css';
 import initialCards from './cards.js';
-import { createCard, deleteCard } from './components/card.js';
-import { openModal, closeModal, closeModalOnClickOverlay } from './components/modal.js';
+import { createCard, deleteCard } from '../components/card.js';
+import { openModal, closeModal, closeModalOnClickOverlay } from '../components/modal.js';
 
 const placesList = document.querySelector('.places__list');
 const editProfileModal = document.querySelector('.popup_type_edit');
