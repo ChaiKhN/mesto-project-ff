@@ -4,9 +4,13 @@ export function openModal(modal) {
   }
   
 export function closeModal(modal) {
-    modal.classList.remove('popup_is-opened');
-    document.removeEventListener('keydown', closeModalByEsc);
-  }
+    modal.classList.add('popup_is-animated'); // Добавляем класс анимации
+    modal.addEventListener('transitionend', function handleTransitionEnd() {
+        modal.classList.remove('popup_is-opened', 'popup_is-animated'); // Удаляем классы после завершения анимации
+        modal.removeEventListener('transitionend', handleTransitionEnd); // Удаляем обработчик
+    });
+}
+
   
 function closeModalByEsc(event) {
     if (event.key === "Escape") {

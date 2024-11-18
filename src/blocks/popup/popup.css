@@ -10,14 +10,19 @@
 
 .popup {
   font-family: 'Inter', Arial, sans-serif;
-  display: none;
+  visibility: hidden; /* Изменено с display: none; на visibility: hidden; */
+  opacity: 0; /* Добавлено для первоначальной прозрачности */
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, .5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  position: fixed; /* Позволяет располагать попап относительно окна */
+  top: 0; /* Начальную позицию верхней грани */
+  left: 0; /* Начальную позицию левой грани */
+  bottom: 0; /* Расшиыт верхнюю границу */
+  right: 0; /* Расшиыт нижнюю границу */
   z-index: 10;
+  transition: visibility 0s, opacity 0.6s; /* Добавлено для анимации */
+  display: flex; /* Добавлено для флекс контейнера */
 }
+
+
