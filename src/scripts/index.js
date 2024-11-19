@@ -21,7 +21,7 @@ const descriptionInput = editProfileModal.querySelector('.popup__input_type_desc
 
 function displayCards() {
   initialCards.forEach(card => {
-    const cardElement = createCard(card, () => deleteCard(cardElement), () => openImagePreview(card), handleLikeCard);
+    const cardElement = createCard(card, () => deleteCard(cardElement), () => openImagePreview(card));
     placesList.prepend(cardElement);
   });
 }
@@ -33,11 +33,7 @@ function openImagePreview(card) {
   openModal(previewModal);
 }
 
-// Обработчик лайка карточки
-function handleLikeCard(event) {
-  const likeButton = event.target;
-  likeButton.classList.toggle('card__like-button_is-active'); // меняем класс для смены стиля
-}
+// Убираем функцию handleLikeCard, теперь она внутри card.js
 
 function populateProfileInputs() {
   nameInput.value = profileTitleElement.textContent;
@@ -63,9 +59,12 @@ function handleCardSubmit(event) {
     link: cardLink,
   };
   
-  const cardElement = createCard(newCard, () => deleteCard(cardElement), () => openImagePreview(newCard), handleLikeCard);
+  const cardElement = createCard(newCard, () => deleteCard(cardElement), () => openImagePreview(newCard));
   placesList.prepend(cardElement);
   closeModal(addCardModal);
+
+  // Очистка инпутов
+  event.target.reset(); // Очищаем все инпуты в форме
 }
 
 profileEditButton.addEventListener('click', () => {
