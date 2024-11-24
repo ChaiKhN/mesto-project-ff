@@ -1,13 +1,11 @@
 .popup__content {
   max-width: 430px; /* Максимальная ширина содержимого */
   width: 100%; /* Ширина попапа */
-  min-height: 330px; /* Минимальная высота содержимого */
   background-color: #fff; /* Цвет фона */
   border-radius: 10px; /* Скругление углов */
   position: relative; /* Первоначальное позиционирование */
   box-sizing: border-box; /* Включает границы в размерах */
   padding: 34px 36px; /* Внутренние отступы */
-  margin: auto; /* Центрирование содержимого */
 }
 
 @media screen and (max-width: 568px) {

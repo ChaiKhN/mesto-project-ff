@@ -2,4 +2,6 @@
   visibility: visible; /* Сделать видимым */
   opacity: 1; /* Полная видимость */
   pointer-events: all;
+  display: flex;
+  transition: visibility 0s, opacity 0.6s;
 }
