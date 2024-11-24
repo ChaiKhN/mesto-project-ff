@@ -1,5 +1,5 @@
 import { dislike, addLike } from "./api"; // Импорт функций для работы с лайками из API
-import { openPopup } from "./modal"; // Импорт функции для открытия попапа
+import { openPopup } from "./modal"; // Импорт функции для открытия попапа подтверждения удаления карточки
 
 const cardTemplate = document.querySelector("#card-template").content; // Получение шаблона карточки
 const popupConfirm = document.querySelector(".popup_type_confirm"); // Получение попапа подтверждения удаления карточки
@@ -14,7 +14,7 @@ const createCard = (card, userId, deleteCard, likeCard, openPopupImage) => {
     const cardLikeCount = cardElement.querySelector(".card__like-count"); // Получение элемента счетчика лайков
 
     cardElement.dataset.cardId = card._id; // Установка ID карточки в dataset
-    cardElement.dataset.ownerId = card.owner._id; // Установка ID владельца карточки в dataset
+    cardElement.dataset.ownerId = card.owner._id; // Установка ID владельца карточки
     cardTitle.textContent = card.name; // Установка названия карточки
     cardImage.src = card.link; // Установка ссылки на изображение карточки
     cardImage.alt = card.name; // Установка альтернативного текста для изображения карточки
@@ -49,28 +49,19 @@ const createCard = (card, userId, deleteCard, likeCard, openPopupImage) => {
 
 // Функция для обработки лайка карточки
 const likeCard = async (evt, cardId) => {
-    let AllLike = evt.target.parentNode.querySelector(".card__like-count"); // Получение счетчика лайков
+    const allLike = evt.target.parentNode.querySelector(".card__like-count"); // Получение счетчика лайков
 
-    // Проверка, активен ли лайк
-    if (evt.target.classList.contains("card__like-button_is-active")) {
-        dislike(cardId) // Если лайк активен, вызываем функцию для его удаления
-            .then((updatedCard) => {
-                evt.target.classList.remove("card__like-button_is-active"); // Убираем класс активного лайка
-                AllLike.textContent = updatedCard.likes.length; // Обновляем счетчик лайков
-            })
-            .catch((err) => {
-                console.log(err); // Логирование ошибок
-            });
-    } else {
-        addLike(cardId) // Если лайк не активен, вызываем функцию для его добавления
-            .then((updatedCard) => {
-                evt.target.classList.add("card__like-button_is-active"); // Добавляем класс активного лайка
-                AllLike.textContent = updatedCard.likes.length; // Обновляем счетчик лайков
-            })
-            .catch((err) => {
-                console.log(err); // Логирование ошибок
-            });
-    }
+    // Определяем метод лайка
+    const likeMethod = evt.target.classList.contains("card__like-button_is-active") ? dislike : addLike;
+
+    likeMethod(cardId) // Вызов метода лайка (добавить или удалить)
+        .then((updatedCard) => {
+            evt.target.classList.toggle("card__like-button_is-active"); // Переключаем класс активного лайка
+            allLike.textContent = updatedCard.likes.length; // Обновляем счетчик лайков
+        })
+        .catch((err) => {
+            console.log(err); // Логирование ошибок
+        });
 };
 
 // Функция для обработки удаления карточки
