@@ -91,7 +91,7 @@ const clearValidation = (formElement, validationConfig) => {
     const buttonElement = formElement.querySelector(
         validationConfig.submitButtonSelector,
     );
-    buttonElement.classList.add(validationConfig.inactiveButtonClass);
+    disabledButton(buttonElement, validationConfig.inactiveButtonClass); // Используем функцию вместо ручного добавления
     inputList.forEach((inputElement) => {
         hideError(
             formElement,
